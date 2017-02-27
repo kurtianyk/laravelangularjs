@@ -1,6 +1,15 @@
 app.controller('ContactController', function($scope, $http, API_URL){
+
+  console.log(new Date());
   $http.get(API_URL + "contact").success(function(response){
+
     $scope.contacts = response;
+    console.log("$scope.contacts", $scope.contacts);
+    for (var i = 0; i < $scope.contacts.length; i++) {
+      console.log(DaysToBDay($scope.contacts[i].birth_day))
+      $scope.contacts[i].daysToBDay = DaysToBDay($scope.contacts[i].birth_day);
+    }
+
   });
 
   // show modal form
@@ -62,5 +71,25 @@ app.controller('ContactController', function($scope, $http, API_URL){
       return false;
     }
   }
+
+  function DaysToBDay(inputBDay) {
+    if (!inputBDay) {
+      return null;
+    }
+
+    var birthday = new Date(inputBDay);
+    var today = new Date();
+
+    var currentYear = today.getFullYear();
+
+    var bDayMonth = birthday.getMonth();
+    var bDayDD = birthday.getDate() + 1;
+
+    //let oneDay = 24 * 60 * 60 * 1000;
+    var bDay = new Date(currentYear, bDayMonth, bDayDD);
+
+    var elapsed = (bDay.getTime() - today.getTime());
+    return Math.floor(elapsed / 86400000);
+  };
 
 });

@@ -20,6 +20,7 @@ class CreateContactTable extends Migration
             $table->string('phone_number')->unique();
             $table->date('birth_day');
             $table->text('info');
+            
             $table->timestamps();
         });
     }

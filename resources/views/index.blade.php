@@ -9,6 +9,7 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   </head>
     <body>
       <div class="container">
@@ -29,7 +30,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="contact in contacts">
+              <tr ng-repeat="contact in contacts" ng-class="(contact.daysToBDay <= 5 && contact.daysToBDay > 0) ? 'danger' : ((contact.daysToBDay <= 10 && contact.daysToBDay > 0) ?  'warning' : '')">
                 <td>@{{ contact.id }}</td>
                 <td>@{{ contact.name }}</td>
                 <td>@{{ contact.surname }}</td>
@@ -84,7 +85,7 @@
                   <div class="form-group">
                     <label class="col-sm-3 control-label">Contact Birth Day</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="birth_day" name="birth_day" placeholder="Contact Birth Day: XXXX-XX-XX" value="@{{birth_day}}" ng-model="contact.birth_day" ng-required="true">
+                      <input type="text" class="form-control" id="birth_day" name="birth_day"  placeholder="Contact Birth Day: XXXX-XX-XX" value="@{{birth_day}}" ng-model="contact.birth_day" ng-required="true">
                       <span ng-show="frmContact.birth_day.$invalid && frmContact.birth_day.$touched">Contact Birth Day field is required</span>
                     </div>
                   </div>
